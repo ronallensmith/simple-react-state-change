@@ -1,0 +1,70 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <title>Forms</title>
+</head>
+<body>
+
+  <div class="container"></div>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      state = {
+        name: '__________',
+        job: '__________'
+      };
+
+      handleOnChangeName = (e) => {
+        this.setState({
+          name: e.target.value
+        })
+      };
+
+      handleOnChangeJob = (e) => {
+        this.setState({
+          job: e.target.value
+        })
+      };
+
+      handleOnSubmit = (e) => {
+        e.preventDefault();
+        console.log('The form was submitted.');
+        console.log(`The name was changed to: ${ this.state.name }.`);
+        console.log(`The Position was changed to: ${this.state.job}.`);
+
+        document.getElementById('name').value='';
+        document.getElementById('job').value='';
+      };
+
+      render() {
+        return (
+          <div className="app-content">
+            <h1>Hello! My name is { this.state.name }, and I'm a { this.state.job }.</h1>
+            <div className="form-div">
+              <form action="" onSubmit={this.handleOnSubmit}>
+                <fieldset>
+                  <legend>Introduce Yourself</legend>
+                  <label>Name:</label>
+                  <input type="text" id="name" onChange={this.handleOnChangeName} /> <br />
+                  <label>Position:</label>
+                  <input type="text" id="job" onChange={this.handleOnChangeJob} /> <br />
+                  <button>Submit</button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, document.querySelector('.container'));
+  </script>
+
+</body>
+</html>
